@@ -22,8 +22,8 @@ namespace dBot
         private readonly IServiceCollection map = new ServiceCollection();
         private readonly CommandService commands = new CommandService();
         private bool NeedsJsonRead = true;
-        private string BotToken = "NDEyMjcwOTU1MjI2NzI2NDEw.DWH0zQ.PXzg2SU7EbxWKoTbPr4kKMXwpfg";
-        private ulong ServerID = 411177543442628610;
+        private string BotToken = "BOTCLIENTTOKENGOESHERE";
+        private ulong ServerID = SERVERIDGOESHERE;
 
         public Program()
         {
