@@ -1,0 +1,9 @@
+language: csharp
+solution: dBot.sln
+script:
+    - xbuild /p:Configuration=Release /p:Platform=Unix dBot.sln
+notifications:
+    webhooks: http://shayandoust.me/travis-ci.php
+branches:
+    only:
+        - master
