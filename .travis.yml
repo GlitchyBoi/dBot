@@ -1,7 +1,7 @@
 language: csharp
 solution: dBot.sln
 script:
-    - xbuild /p:Configuration=Release /p:Platform=Unix dBot.sln
+    - xbuild /p:Configuration=Release /p:Platform=x64 dBot.sln
 notifications:
     webhooks: http://shayandoust.me/travis-ci.php
 branches:
