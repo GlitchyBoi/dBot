@@ -33,7 +33,7 @@ namespace dBot
             });
             client.Log += Logger;
             commands.Log += Logger;
-            // Read JSON data
+            // Read JSON data 
             ReadJson();
         }
         private void ReadJson()
