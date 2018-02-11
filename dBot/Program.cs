@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using Newtonsoft.Json;
 
 namespace dBot
 {
@@ -20,6 +21,9 @@ namespace dBot
         public readonly DiscordSocketClient client;
         private readonly IServiceCollection map = new ServiceCollection();
         private readonly CommandService commands = new CommandService();
+        private bool NeedsJsonRead = true;
+        private string BotToken = "NDEyMjcwOTU1MjI2NzI2NDEw.DWH0zQ.PXzg2SU7EbxWKoTbPr4kKMXwpfg";
+        private ulong ServerID = 411177543442628610;
 
         public Program()
         {
@@ -29,6 +33,17 @@ namespace dBot
             });
             client.Log += Logger;
             commands.Log += Logger;
+            // Read JSON data
+            ReadJson();
+        }
+        private void ReadJson()
+        {
+            if (NeedsJsonRead)
+            {
+                
+
+                NeedsJsonRead = false;
+            }
         }
         private static Task Logger(LogMessage message)
         {
@@ -56,7 +71,7 @@ namespace dBot
         private async Task MainAsync()
         {
             await InitCommands();
-            await client.LoginAsync(TokenType.Bot, "NDEyMjcwOTU1MjI2NzI2NDEw.DWH0zQ.PXzg2SU7EbxWKoTbPr4kKMXwpfg");
+            await client.LoginAsync(TokenType.Bot, BotToken);
             await client.StartAsync();
             await Task.Delay(System.Threading.Timeout.Infinite);
         }
@@ -84,12 +99,18 @@ namespace dBot
             {
                 var context = new SocketCommandContext(client, msg);
                 var result = await commands.ExecuteAsync(context, pos, services);
-
-                if (context.)
+                string command = context.Message.ToString().TrimStart('!');
+                
+                if (command == "ping")
                 {
-
+                    Console.WriteLine("pong");
+                    await SendMessageToChannel(411177792814972928, "pong");
                 }
             }
+        }
+        private async Task SendMessageToChannel(ulong channelID, string message)
+        {
+            client.GetGuild(ServerID).GetTextChannel(channelID).SendMessageAsync(message);
         }
     }
 }
